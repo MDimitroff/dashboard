@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,10 @@ namespace Dashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // AWS
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonDynamoDB>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
