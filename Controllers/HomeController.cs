@@ -33,7 +33,22 @@ namespace Dashboard.Controllers
             var orders = await GetOrdersAsync();
             var claims = await GetClaimsAsync();
 
-            return View();
+            var data = from customer in customers
+                       let purchases = orders.Where(o => o.Username == customer.Username)
+                       let complains = claims.Where(c => c.Username == customer.Username)
+                       select new Summary
+                       {
+                            Customer = new Customer
+                            {
+                                Username = customer.Username,
+                                Name = customer.Name,
+                                Date = customer.Date
+                            },
+                            Orders = purchases.ToList(),
+                            Claims = complains.ToList()
+                       };
+
+            return View(data);
         }
 
         public IActionResult Privacy()
