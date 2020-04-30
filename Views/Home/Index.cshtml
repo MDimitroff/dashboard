@@ -21,19 +21,22 @@
                         <span>Registered on: @user.Customer.Date</span><br />
                     </div>
                     <br />
-                    <div class="margin-left-30">
-                        <span><b>Orders</b></span><br />
-                        @foreach (var order in user.Orders)
-                        {
-                            <span>Item: @order.Item</span><br />
-                            <span>Quantity: @order.Quantity</span><br />
-                            <span>Purchased on: @order.Date</span><br />
-                            <br />
-                        }
-                    </div>
+                    @if(user.Orders.Count > 0)
+                    {
+                        <div class="margin-left-40">
+                            <span><b>Orders</b></span><br />
+                            @foreach (var order in user.Orders)
+                            {
+                                <span>Item: @order.Item</span><br />
+                                <span>Quantity: @order.Quantity</span><br />
+                                <span>Purchased on: @order.Date</span><br />
+                                <br />
+                            }
+                        </div>                        
+                    }
                     @if (user.Claims.Count > 0)
                     {
-                        <div class="margin-left-60">
+                        <div class="margin-left-80">
                             <span><b>Claims</b></span><br />
                             @foreach (var claim in user.Claims)
                             {
